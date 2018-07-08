@@ -1,0 +1,28 @@
+- hosts: localhost.local
+  connection: local
+  roles:
+    - openwisp.openwisp2-imagegenerator
+  vars:
+    openwisp2fw_image_flavors:
+      standard:
+        brcm47xx:
+          packages: "{{ openwisp2fw_default_packages }}"
+    openwisp2fw_source_dir: /home/username/openwisp2-firmware-source
+    openwisp2fw_generator_dir: /home/username/openwisp2-firmware-generator
+    openwisp2fw_bin_dir: /home/username/openwisp2-firmware-builds
+    openwisp2fw_source_targets:
+      - system: brcm47xx
+        subtarget: mips74k
+        profile: "linksys_wrt160n_v3"
+    openwisp2fw_organizations:
+      - name: homeNet
+        flavours:
+          - standard
+        luci_openwisp:
+          username: "operator"
+          password: "smoothOperator53"
+        openwisp:
+          url: "https://example.com"
+          shared_secret: ""
+          unmanaged: "{{ openwisp2fw_default_unmanaged }}"
+        root_password: "wOgPP90R2JaRF2i1kzejLokpXMZ02xWH"
