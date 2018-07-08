@@ -1,15 +1,22 @@
-- hosts: localhost.local
+- hosts: localhost
   connection: local
   roles:
     - openwisp.openwisp2-imagegenerator
   vars:
-    openwisp2fw_image_flavors:
-      standard:
+    openwisp2fw_image_flavours:
+      barebones:
         brcm47xx:
-          packages: "{{ openwisp2fw_default_packages }}"
-    openwisp2fw_source_dir: /home/username/openwisp2-firmware-source
-    openwisp2fw_generator_dir: /home/username/openwisp2-firmware-generator
-    openwisp2fw_bin_dir: /home/username/openwisp2-firmware-builds
+          packages:
+            - -openvpn-{{ openwisp2fw_ssl_lib }}
+#            - -luci-openwisp-{{ openwisp2fw_ssl_lib }}
+#            - -luci-theme-openwisp
+#            - -luci-mod-openwisp
+#            - -uhttpd
+#            - -uhttpd-mod-ubus
+            - -wpad-mini
+    openwisp2fw_source_dir: /home/openwisp2/openwisp2-firmware-source
+    openwisp2fw_generator_dir: /home/openwisp2/openwisp2-firmware-generator
+    openwisp2fw_bin_dir: /home/openwisp2/openwisp2-firmware-builds
     openwisp2fw_source_targets:
       - system: brcm47xx
         subtarget: mips74k
@@ -17,12 +24,12 @@
     openwisp2fw_organizations:
       - name: homeNet
         flavours:
-          - standard
+          - barebones
         luci_openwisp:
-          username: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-          password: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+          username: "operator"
+          password: "OpenWispTwo"
         openwisp:
-          url: "https://XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.com"
-          shared_secret: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+          url: "https://test.example.com"
+          shared_secret: "qwertyuiopasdfghjkl0987654321"
           unmanaged: "{{ openwisp2fw_default_unmanaged }}"
-        root_password: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        root_password: "OpenWispTwo"
