@@ -1,1 +1,6 @@
-
+---
+- name: Replication Master Dump and Transfer DB
+  hosts: s1,s2,s3
+  become: true
+  tasks:
+  
